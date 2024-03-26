@@ -1,0 +1,12 @@
+// variables
+
+@import '../_variables';
+
+.title {
+   color: $text-color-purple;
+   font-family: $inter;
+   font-weight: bold;
+   span {
+      color: $text-color-gold;
+   }
+}
