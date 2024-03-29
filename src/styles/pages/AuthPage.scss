@@ -43,6 +43,17 @@
       border-radius: 30px;
       text-align: center;
       padding: 50px 100px;
+      .error {
+         color: $text-color-error;
+         font-family: $inter;
+         display: flex;
+         align-items: center;
+         img {
+            margin: 0 10px 0 0;
+            width: 26px;
+            height: 26px;
+         }
+      }
       input {
          width: 400px;
          height: 50px;
