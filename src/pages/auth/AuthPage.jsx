@@ -3,6 +3,7 @@ import Logo from '../../components/Logo';
 import '../../styles/pages/AuthPage.scss'
 
 const AuthPage = () => {
+
    return (
       <div className="auth-wrapper">
          <main className="auth">

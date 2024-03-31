@@ -3,58 +3,112 @@ import Logo from "../../components/Logo";
 import errorIcon from '../../assets/img/error-icon.png';
 import 'react-phone-input-2/lib/style.css';
 import { NavLink } from "react-router-dom";
-import { useRef } from "react";
-import { changeNumberFormat } from "../../utils/changeNumberFormat";
-import { useState } from "react";
+import { useForm, Controller } from "react-hook-form";
 
 const SignUpPage = () => {
 
-   const firstNameRef = useRef();
-   const SecondNameRef = useRef();
-   const emailRef = useRef();
-   const numberRef = useRef();
-   const passwordRef = useRef();
-   const [visible, setVisible] = useState(false);
+   const {
+      register,
+      formState: {
+         errors
+      },
+      handleSubmit,
+      control,
+      setValue
+   } = useForm({
+      mode: "onBlur",
+   })
 
-   const validateForm = (data) => {
-
-   }
-
-   const sendData = (e) => {
-      e.preventDefault();
-
-      const userData = {
-         userName: firstNameRef.current.value + ' ' + SecondNameRef.current.value,
-         email: emailRef.current.value,
-         number: changeNumberFormat(numberRef.current.state.formattedNumber),
-         password: passwordRef.current.value
-      }
-
-      const isCorrect = validateForm(userData);
+   const onSubmit = (data) => {
+      alert(JSON.stringify(data))
    }
 
    return (
       <div className="auth-wrapper">
          <main className="auth sign-up">
             <Logo fs={66} />
-            <form className="sign-up-form">
-               <input type="text" ref={firstNameRef} name="firstName" placeholder="First Name" />
-               <span className="error"><img src={errorIcon} alt="Error icon" />Имя должно содержать минимум 2 буквы</span>
-               <input type="text" ref={SecondNameRef} name="secondName" placeholder="Second Name" />
-               <input type="email" ref={emailRef} onClick={() => setVisible(!visible)} placeholder="Email Address" />
-               <PhoneInput ref={numberRef} country={'pl'} />
-               {visible &&
-                  <>
-                     <input type="text" ref={passwordRef} name="password" placeholder="Password" />
-                     <p className="agree-p">By clicking below and creating an account, I agree to AlaskaTB <NavLink >Terms of Service</NavLink>
-                        and <NavLink>Privacy Policy</NavLink>.
-                     </p>
-                  </>
-               }
-               <button onClick={e => sendData(e)} className="purple-btn">Create account</button>
+            <form className="sign-up-form" onSubmit={handleSubmit(onSubmit)}>
+               <input type="text" placeholder="First Name" {...register('firstName', {
+                  required: 'First name field is required!',
+                  minLength: {
+                     value: 2,
+                     message: 'Your first name must be longer than 2 symbols'
+                  },
+                  maxLength: {
+                     value: 24,
+                     message: 'Your first name must be shorter than 24 symbols!'
+                  }
+               })} />
+               {errors.firstName && <p className="error"><img src={errorIcon} alt="Error Icon" />{errors.firstName.message}</p>}
+               <input type="text" placeholder="Second Name" {...register('secondName', {
+                  required: 'Second name field is required!',
+                  minLength: {
+                     value: 2,
+                     message: 'Your second name must be longer than 2 symbols'
+                  },
+                  maxLength: {
+                     value: 24,
+                     message: 'Your second name must be shorter than 24 symbols!'
+                  }
+               })} />
+               {errors.secondName && <p className="error"><img src={errorIcon} alt="Error Icon" />{errors.secondName.message}</p>}
+               <input type="email" placeholder="Email Address" {...register('email', {
+                  required: 'Email field is required!',
+                  pattern: {
+                     value: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/,
+                     message: 'Please input valid email!'
+                  }
+               })} />
+               {errors.email && <p className="error"><img src={errorIcon} alt="Error Icon" />{errors.email.message}</p>}
+               <div className="account-type">
+                  <span className="caption">Account Type</span>
+                  <label>
+                     <input type="radio" value="customer" {...register('accountType', { required: 'Please select your account type!' })} />
+                     Customer
+                  </label>
+                  <label>
+                     <input type="radio" value="executor" {...register('accountType', { required: 'Please select your account type!' })} />
+                     Executor
+                  </label>
+               </div>
+               {errors.accountType && <p className="error"><img src={errorIcon} alt="Error Icon" />{errors.accountType.message}</p>}
+               <Controller
+                  control={control}
+                  name="phoneNumber"
+                  rules={{
+                     required: 'Phone number is required!',
+                     minLength: {
+                        value: 7,
+                        message: 'Your phone number must be longer than 7 symbols'
+                     },
+                  }}
+                  render={({ field: { onChange, onBlur, value, ref } }) => (
+                     <PhoneInput
+                        country={'pl'}
+                        value={value}
+                        onChange={(phone) => {
+                           setValue("phoneNumber", phone);
+                           onChange(phone);
+                        }}
+                     />
+                  )}>
+               </Controller>
+               {errors.phoneNumber && <p className="error"><img src={errorIcon} alt="Error Icon" />{errors.phoneNumber.message}</p>}
+               <input type="text" name="password" placeholder="Password" {...register('password', {
+                  required: 'Please input your password!',
+                  minLength: {
+                     value: 5,
+                     message: 'Your password must be longer than 5 symbols!'
+                  }
+               })}/>
+               {errors.password && <p className="error"><img src={errorIcon} alt="Error Icon" />{errors.password.message}</p>}
+               <p className="agree-p">By clicking below and creating an account, I agree to AlaskaTB <NavLink >Terms of Service</NavLink>
+                  and <NavLink>Privacy Policy</NavLink>.
+               </p>
+               <button className="purple-btn">Create account</button>
             </form>
          </main>
-      </div>
+      </div >
    );
 }
 

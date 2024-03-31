@@ -146,6 +146,34 @@
          flex-direction: column;
          justify-content: center;
          align-items: flex-start;
+         .account-type {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            margin: 13px 0;
+            .caption {
+               padding: 10px 25px;
+               background: $background-color-purple;
+               border-radius: 25px;
+               font-size: 16px;
+               font-family: $inter;
+               color: $text-color-white;
+            }
+            label {
+               display: flex;
+               align-items: center;
+               margin-left: 10px;
+               font-size: 16px;
+               font-family: $inter;
+               font-weight: 400;
+               input {
+                  width: 15px;
+                  height: 15px;
+                  margin: 0 10px;
+               }
+            }
+         }
          .form-control {
             padding: 10px 20px 10px 60px;
          }
@@ -159,7 +187,8 @@
          .react-tel-input .selected-flag .arrow {
             left: 25px;
          }
-         input, .react-tel-input  {
+         input,
+         .react-tel-input {
             margin: 10px 0;
          }
          .agree-p {
