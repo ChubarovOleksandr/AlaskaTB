@@ -28,7 +28,7 @@ const SignUpPage = () => {
          <main className="auth sign-up">
             <Logo fs={66} />
             <form className="sign-up-form" onSubmit={handleSubmit(onSubmit)}>
-               <input type="text" placeholder="First Name" {...register('firstName', {
+               <input type="text" name='First name' placeholder="First Name" {...register('firstName', {
                   required: 'First name field is required!',
                   minLength: {
                      value: 2,
@@ -40,7 +40,7 @@ const SignUpPage = () => {
                   }
                })} />
                {errors.firstName && <p className="error"><img src={errorIcon} alt="Error Icon" />{errors.firstName.message}</p>}
-               <input type="text" placeholder="Second Name" {...register('secondName', {
+               <input type="text" name='Second name' placeholder="Second Name" {...register('secondName', {
                   required: 'Second name field is required!',
                   minLength: {
                      value: 2,
@@ -52,7 +52,7 @@ const SignUpPage = () => {
                   }
                })} />
                {errors.secondName && <p className="error"><img src={errorIcon} alt="Error Icon" />{errors.secondName.message}</p>}
-               <input type="email" placeholder="Email Address" {...register('email', {
+               <input type="email" name="email" placeholder="Email Address" {...register('email', {
                   required: 'Email field is required!',
                   pattern: {
                      value: /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/,
