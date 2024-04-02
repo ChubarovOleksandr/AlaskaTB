@@ -14,7 +14,6 @@ export const setRegisterData = async ({ email, username, password }) => {
       });
       console.log(response.data);
       return response.data;
-
    } catch (error) {
       console.log(error);
       return error;

@@ -11,6 +11,7 @@ const LogInPage = () => {
 
    const [isIcon, setIsIcon] = useState(true);
    const [showPassword, setShowPassword] = useState(false);
+
    const {
       formState: {
          errors
@@ -22,7 +23,6 @@ const LogInPage = () => {
    })
 
    const onSubmit = data => {
-      alert(JSON.stringify(data));
    }
 
    return (

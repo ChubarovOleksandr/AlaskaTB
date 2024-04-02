@@ -3,9 +3,11 @@ import { setRegisterData } from "../../api/authAPI";
 
 const initialState = {
    userData: {
-      email: '',
+      email: 'asdadasas@sadas.das',
       username: '',
       password: '',
+      phoneNumber: null,
+      accountType: '',
    }
 };
 

@@ -2,10 +2,15 @@ import PhoneInput from "react-phone-input-2";
 import Logo from "../../components/Logo";
 import errorIcon from '../../assets/img/error-icon.png';
 import 'react-phone-input-2/lib/style.css';
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { setUserData } from "../../redux/slice/authSlice";
 
 const SignUpPage = () => {
+
+   const dispatch = useDispatch();
+   const navigate = useNavigate();
 
    const {
       register,
@@ -20,7 +25,15 @@ const SignUpPage = () => {
    })
 
    const onSubmit = (data) => {
-      alert(JSON.stringify(data))
+      const userData = {
+         email: data.email,
+         username: `${data.firstName} ${data.secondName}`,
+         password: data.password,
+         phoneNumber: +data.phoneNumber,
+         accountType: data.accountType
+      }
+      dispatch(setUserData(userData));
+      navigate('/verification');
    }
 
    return (
