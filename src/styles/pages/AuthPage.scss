@@ -98,6 +98,19 @@
             right: 200%;
          }
       }
+      .instructions {
+         font-family: $inter;
+         font-size: 20px;
+         text-align: center;
+         margin: 40px auto;
+         max-width: 800px;
+      }
+      .input-title {
+         font-size: 12px;
+         font-weight: 600;
+         font-family: $inter;
+         margin: 10px 0 5px 0;
+      }
    }
    .auth.log-in {
       .log-in-form {
@@ -106,12 +119,6 @@
          align-items: flex-start;
          flex-direction: column;
          margin: 40px 0 0 0;
-      }
-      .input-title {
-         font-size: 12px;
-         font-weight: 600;
-         font-family: $inter;
-         margin: 10px 0 5px 0;
       }
       input {
          margin: 0 0 10px 0;
@@ -208,13 +215,6 @@
       }
    }
    .auth.verification {
-      .instructions {
-         font-family: $inter;
-         font-size: 20px;
-         text-align: center;
-         margin: 40px auto;
-         max-width: 800px;
-      }
       .instructions span {
          color: $text-color-purple-active;
          font-weight: bold;
@@ -256,6 +256,24 @@
                   transition: all 0.4s;
                }
             }
+      }
+   }
+   .auth.reset {
+      .reset-form {
+         display: flex;
+         justify-content: center;
+         align-items: flex-start;
+         flex-direction: column;
+         margin: 40px 0 0 0;
+         button {
+            margin-top: 40px;
+         }
+         .error {
+            margin: 7px 0 0 0;
+         }
+         .instructions {
+            margin: 20px auto;
+         }
       }
    }
 }

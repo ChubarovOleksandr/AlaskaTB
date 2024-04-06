@@ -6,11 +6,14 @@ import errorIcon from '../../assets/img/error-icon.png';
 import '../../styles/pages/AuthPage.scss';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { logIn } from '../../redux/slice/authSlice';
+import { useDispatch } from 'react-redux';
 
 const LogInPage = () => {
 
    const [isIcon, setIsIcon] = useState(true);
    const [showPassword, setShowPassword] = useState(false);
+   const dispatch = useDispatch();
 
    const {
       formState: {
@@ -23,6 +26,10 @@ const LogInPage = () => {
    })
 
    const onSubmit = data => {
+      const userData = {
+         ...data
+      }
+      dispatch(logIn(userData));
    }
 
    return (
@@ -63,7 +70,7 @@ const LogInPage = () => {
                   })} />
                   {errors.password && <p className="error"><img src={errorIcon} alt="Error Icon" />{errors.password.message}</p>}
                </label>
-               <NavLink className='forget-btn' to=''>Forgot password?</NavLink>
+               <NavLink className='forget-btn' to='/reset'>Forgot password?</NavLink>
                <button className='purple-btn'>Log in</button>
             </form>
          </main>

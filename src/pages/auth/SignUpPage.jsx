@@ -5,7 +5,7 @@ import 'react-phone-input-2/lib/style.css';
 import { NavLink, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { setUserData } from "../../redux/slice/authSlice";
+import { registData, setUserData } from "../../redux/slice/authSlice";
 
 const SignUpPage = () => {
 
@@ -29,10 +29,10 @@ const SignUpPage = () => {
          email: data.email,
          username: `${data.firstName} ${data.secondName}`,
          password: data.password,
-         phoneNumber: +data.phoneNumber,
-         accountType: data.accountType
+         phone_number: data.phoneNumber,
+         account_type: data.accountType
       }
-      dispatch(setUserData(userData));
+      dispatch(registData(userData));
       navigate('/verification');
    }
 
@@ -95,7 +95,7 @@ const SignUpPage = () => {
                         message: 'Your phone number must be longer than 7 symbols'
                      },
                   }}
-                  render={({ field: { onChange, onBlur, value, ref } }) => (
+                  render={({ field: { onChange, value } }) => (
                      <PhoneInput
                         country={'pl'}
                         value={value}
