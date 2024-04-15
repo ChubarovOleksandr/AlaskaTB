@@ -27,7 +27,6 @@ const ResetPasswordPage = () => {
          <main className="auth reset">
             <Logo fs={66} />
             <form onSubmit={handleSubmit(onSubmit)} className="reset-form">
-               <span className='instructions'>Please input your email</span>
                <input type="email" name="email" placeholder='Email Address' {...register('email', {
                   required: 'Email field is required!',
                   pattern: {

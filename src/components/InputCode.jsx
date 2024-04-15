@@ -26,7 +26,6 @@ const InputCode = ({ setIsFormActive, code, setCode }) => {
    const handleKeyDown = (e, index) => {
       const input = e.target;
       const previousInput = inputRefs[index - 1];
-      const nextInput = inputRefs[index + 1];
 
       if ((e.keyCode === 8 || e.keyCode === 46)) {
          e.preventDefault();
@@ -66,7 +65,7 @@ const InputCode = ({ setIsFormActive, code, setCode }) => {
 
       const newCode = [...code];
       newCode[index] = input.value;
-      setCode(newCode)
+      setCode(newCode.join(''))
 
       const nextInput = inputRefs[index + 1];
 

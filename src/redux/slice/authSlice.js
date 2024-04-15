@@ -9,8 +9,7 @@ const initialState = {
       password: '',
       phone_number: '',
       account_type: '',
-   },
-   error: '',
+   }
 };
 
 ///////////// AUTH LOGIC ////////////
@@ -19,24 +18,24 @@ export const registData = createAsyncThunk(
    'authSlice/registData',
    async function (params, { rejectWithValue }) {
       try {
-         console.log(params);
          const response = await setRegisterData(params);
-         return response.data;
+         return response;
       } catch (error) {
-         console.log(error);
-         return rejectWithValue(error.response.data);
+         return rejectWithValue(error)
       }
    }
 )
 
 export const sendCode = createAsyncThunk(
    'authSlice/sendCode',
-   async function (params) {
+   async function (params, {rejectWithValue}) {
       try {
          const response = await sendVerifyCode(params);
+         console.log('i return good response');
          return response;
       } catch (error) {
-         console.log(error);
+         console.log('i return error response');
+         return rejectWithValue(error);
       }
    }
 )
@@ -91,19 +90,6 @@ export const authSlice = createSlice({
       builder
          .addCase(registData.fulfilled, (state, action) => {
             state.userData = action.payload;
-         })
-         .addCase(registData.rejected, (state, action) => {
-            console.log(action.payload);
-            state.userData.error = action.payload.detail;
-         })
-         .addCase(sendCode.fulfilled, (state, action) => {
-
-         })
-         .addCase(logIn.fulfilled, (state, action) => {
-            
-         })
-         .addCase(setEmail.fulfilled, (state, action) => {
-            console.log(action);
          })
    }
 })

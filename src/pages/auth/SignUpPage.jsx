@@ -5,13 +5,13 @@ import 'react-phone-input-2/lib/style.css';
 import { NavLink, useNavigate } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { registData, setUserData } from "../../redux/slice/authSlice";
+import { registData } from "../../redux/slice/authSlice";
 
 const SignUpPage = () => {
 
    const dispatch = useDispatch();
    const navigate = useNavigate();
-
+   
    const {
       register,
       formState: {
@@ -32,7 +32,11 @@ const SignUpPage = () => {
          phone_number: data.phoneNumber,
          account_type: data.accountType
       }
-      dispatch(registData(userData));
+      dispatch(registData(userData)
+         .then((result) => {
+            
+         })
+      );
       navigate('/verification');
    }
 

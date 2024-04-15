@@ -224,6 +224,9 @@
          flex-direction: column;
          justify-content: center;
          align-items: center;
+         p.error {
+            margin: 20px 0 0px 0;
+         }
          .verification-input {
             text-align: center;
             font-family: $inter;
@@ -243,7 +246,7 @@
             font-weight: bold;
             border-radius: 100px;
             padding: 0 20px;
-            margin-top: 40px;
+            margin-top: 30px;
             color: #fff;
             background: $background-color-grey;
             transition: all 0.4s;
@@ -270,9 +273,6 @@
          }
          .error {
             margin: 7px 0 0 0;
-         }
-         .instructions {
-            margin: 20px auto;
          }
       }
    }

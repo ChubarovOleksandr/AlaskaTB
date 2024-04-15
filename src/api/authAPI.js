@@ -23,10 +23,8 @@ export const sendVerifyCode = async (data) => {
       const response = await instance.post(`/verify`, {
          ...data
       });
-      console.log(response.data);
       return response.data;
    } catch (error) {
-      console.log(error);
-      return error;
+      throw error.response.data.detail;
    }
 }
